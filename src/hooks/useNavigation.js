@@ -15,5 +15,9 @@ export const useNavigation = () => {
     navigate('/signup');
   };
 
-  return { navigateHome, navigateSignin, navigateSignup };
+  const navigateTodo = () => {
+    navigate('/todo');
+  };
+
+  return { navigateHome, navigateSignin, navigateSignup, navigateTodo };
 };

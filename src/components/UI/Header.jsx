@@ -3,7 +3,18 @@ import Button from './Button';
 
 function Header() {
   const { toggleDarkMode, isDarkModeOn } = useDarkMode();
-  const { navigateHome, navigateSignin, navigateSignup } = useNavigation();
+  const { navigateHome, navigateSignin, navigateSignup, navigateTodo } =
+    useNavigation();
+
+  const handleTodoClick = () => {
+    const token = localStorage.getItem('ACCESS_TOKEN');
+
+    if (token) {
+      navigateTodo();
+    } else {
+      navigateSignin();
+    }
+  };
 
   return (
     <header className="text-gray-600 dark:bg-gray-900 shadow-lg">
@@ -21,6 +32,13 @@ function Header() {
           </Button>
           <Button type="button" onClick={navigateSignup} className="bg-sky-100">
             회원가입
+          </Button>
+          <Button
+            type="button"
+            onClick={handleTodoClick}
+            className="bg-sky-100"
+          >
+            TODO
           </Button>
 
           <Button
