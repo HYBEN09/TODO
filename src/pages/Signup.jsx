@@ -1,7 +1,8 @@
-import Button from '@/components/UI/Button';
 import { useState } from 'react';
-import { useAuth } from '@/context/AuthContext';
+import Input from '@/components/UI/Input';
+import Button from '@/components/UI/Button';
 import { useValidation } from '@/hooks/index';
+import { useAuth } from '@/context/AuthContext';
 
 function Signup() {
   const [userInputs, setUserInputs] = useState({
@@ -50,64 +51,33 @@ function Signup() {
           회원가입
         </h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-gray-700 dark:text-gray-300"
-            >
-              이메일
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              data-testid="email-input"
-              className={`w-full mt-1 p-3 border rounded-lg focus:ring focus:ring-indigo-200 dark:focus:ring-yellow-400 ${
-                emailValid ? '' : 'border-red-500'
-              }`}
-              placeholder="이메일을 입력하세요"
-              value={email}
-              onChange={saveUserInputs}
-            />
-            {/* 추가: 이메일 유효성 오류 메시지 */}
-            {!emailValid && (
-              <p className="text-red-500 text-sm mt-1">
-                올바른 이메일 형식이 아닙니다.
-              </p>
-            )}
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-gray-700 dark:text-gray-300"
-            >
-              비밀번호
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              data-testid="password-input"
-              className={`w-full mt-1 p-3 border rounded-lg focus:ring focus:ring-indigo-200 dark:focus:ring-yellow-400 ${
-                passwordValid ? '' : 'border-red-500'
-              }`}
-              placeholder="비밀번호를 입력하세요"
-              value={password}
-              onChange={saveUserInputs}
-            />
-            {/* 추가: 비밀번호 유효성 오류 메시지 */}
-            {!passwordValid && (
-              <p className="text-red-500 text-sm mt-1">
-                비밀번호는 8자 이상이어야 합니다.
-              </p>
-            )}
-          </div>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            label="이메일"
+            placeholder="이메일을 입력하세요"
+            value={email}
+            onChange={saveUserInputs}
+            required
+            error={emailValid ? '' : '올바른 이메일 형식이 아닙니다.'}
+          />
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            label="비밀번호"
+            placeholder="비밀번호를 입력하세요"
+            value={password}
+            onChange={saveUserInputs}
+            required
+            error={passwordValid ? '' : '비밀번호는 8자 이상이어야 합니다.'}
+          />
           <div className="text-center">
             <Button
               type="submit"
               data-testid="signup-button"
               onClick={signupWithForm}
-              // 추가: 이메일 또는 비밀번호가 유효하지 않으면 버튼 비활성화
               disabled={!emailValid || !passwordValid}
               className="bg-sky-500 text-white font-semibold py-3 px-10 rounded-lg hover:bg-sky-600 focus:ring focus:ring-sky-200 dark:focus:ring-yellow-400"
             >

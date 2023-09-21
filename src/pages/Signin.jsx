@@ -1,6 +1,8 @@
-import Button from '@/components/UI/Button';
-import { useAuth } from '../context/AuthContext';
 import { useState } from 'react';
+import Button from '@/components/UI/Button';
+import Input from '@/components/UI/Input';
+import { useAuth } from '@/context/AuthContext';
+import { useNavigation } from '@/hooks/useNavigation';
 
 function Signin() {
   const [userInputs, setUserInputs] = useState({
@@ -9,6 +11,7 @@ function Signin() {
   });
 
   const { signin } = useAuth();
+  const { navigateTodo } = useNavigation();
   const { email, password } = userInputs;
 
   const saveUserInputs = ({ currentTarget }) => {
@@ -20,13 +23,18 @@ function Signin() {
     }));
   };
 
-  const signinWithForm = () => {
-    signin(email, password);
+  const signinWithForm = async () => {
+    try {
+      await signin(email, password);
+      navigateTodo();
+    } catch (error) {
+      alert('🚫 로그인 실패:', error);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userInputs);
+    signinWithForm();
   };
 
   return (
@@ -36,47 +44,32 @@ function Signin() {
           로그인
         </h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-gray-700 dark:text-gray-300"
-            >
-              이메일
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="w-full mt-1 p-3 border rounded-lg focus:ring focus:ring-indigo-200 dark:focus:ring-yellow-400"
-              placeholder="이메일을 입력하세요"
-              data-testid="email-input"
-              onChange={saveUserInputs}
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-gray-700 dark:text-gray-300"
-            >
-              비밀번호
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="w-full mt-1 p-3 border rounded-lg focus:ring focus:ring-indigo-200 dark:focus:ring-yellow-400"
-              placeholder="비밀번호를 입력하세요"
-              data-testid="password-input"
-              onChange={saveUserInputs}
-              required
-            />
-          </div>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="이메일을 입력하세요"
+            value={email}
+            onChange={saveUserInputs}
+            required
+            label="이메일"
+          />
+
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="비밀번호를 입력하세요"
+            value={password}
+            onChange={saveUserInputs}
+            required
+            label="비밀번호"
+          />
+
           <div className="text-center">
             <Button
               type="submit"
               data-testid="signin-button"
-              onClick={signinWithForm}
               className="bg-sky-500 text-white font-semibold py-3 px-10 rounded-lg hover:bg-sky-600 focus:ring focus:ring-sky-200 dark:focus:ring-yellow-400"
             >
               로그인
