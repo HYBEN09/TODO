@@ -6,15 +6,10 @@
 @import url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff');
 
 * {
-  @apply m-0 p-0 box-border;
+  @apply m-0 p-0 box-border dark:text-white;
+  transition: background-color 0.3s;
 }
 
 body {
-  @apply bg-white;
-}
-
-@layer utilities {
-  .minHeight {
-    min-height: calc(100vh - 184px);
-  }
+  @apply bg-white h-full  dark:bg-gray-800;
 }
