@@ -46,10 +46,8 @@ function Signup() {
 
   return (
     <div className="min-h-custom bg-sky-100 dark:bg-gray-800 flex justify-center items-center">
-      <div className="bg-white dark:bg-slate-600 rounded-lg shadow-md p-10 max-w-xl w-full">
-        <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-10 text-center">
-          회원가입
-        </h2>
+      <div className="container-box">
+        <h2 className="title">회원가입</h2>
         <form onSubmit={handleSubmit}>
           <Input
             id="email"
