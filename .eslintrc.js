@@ -16,12 +16,13 @@ module.exports = {
   ],
   overrides: [
     {
-      env: {
-        node: true,
-      },
       files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
-        sourceType: 'script',
+        ecmaFeatures: {
+          jsx: true,
+        },
+        ecmaVersion: 'latest',
+        sourceType: 'module',
       },
     },
   ],
@@ -29,6 +30,23 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react'],
-  rules: {},
+  plugins: ['react', 'react-hooks', 'jsx-a11y'],
+  rules: {
+    'react/prop-types': 'off',
+    'no-unused-vars': 'warn',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'jsx-a11y/anchor-has-content': [
+      'warn',
+      {
+        components: ['Link'],
+      },
+    ],
+    'jsx-a11y/anchor-is-valid': [
+      'warn',
+      {
+        components: ['Link'],
+      },
+    ],
+  },
 };
