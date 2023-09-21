@@ -11,4 +11,5 @@ module.exports = {
       custom: 'calc(100vh - 184px)',
     },
   },
+  darkMode: 'class',
 };
