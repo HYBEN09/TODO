@@ -18,7 +18,7 @@ function Input({
         type={type}
         id={id}
         name={name}
-        className={`w-full mt-1 p-3 border rounded-lg focus:ring focus:ring-indigo-200 dark:focus:ring-yellow-400 ${
+        className={`w-full mt-1 p-3 border rounded-lg focus:ring focus:ring-indigo-200 dark:focus:ring-yellow-400 dark:text-gray-900 ${
           error ? 'border-red-500' : ''
         }`}
         placeholder={placeholder}
