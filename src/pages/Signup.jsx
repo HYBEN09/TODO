@@ -34,6 +34,10 @@ function Signup() {
   const signupWithForm = () => {
     if (emailValid && passwordValid) {
       signup(email, password);
+      setUserInputs({
+        email: '',
+        password: '',
+      });
     } else {
       alert('이메일과 비밀번호를 올바르게 입력하세요.');
     }

@@ -26,6 +26,10 @@ function Signin() {
   const signinWithForm = async () => {
     try {
       await signin(email, password);
+      setUserInputs({
+        email: '',
+        password: '',
+      });
       navigateTodo();
     } catch (error) {
       alert('🚫 로그인 실패:', error);
