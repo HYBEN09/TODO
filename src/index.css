@@ -15,6 +15,10 @@ body {
 }
 
 @layer utilities {
+  .main {
+    @apply min-h-custom bg-sky-100 dark:bg-gray-800 flex justify-center items-center;
+  }
+
   .container-box {
     @apply bg-white dark:bg-slate-600 rounded-lg shadow-md p-10 max-w-xl w-full;
   }

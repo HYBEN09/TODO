@@ -19,7 +19,7 @@ function Todo() {
   };
 
   return (
-    <div className="min-h-custom bg-sky-100 dark:bg-gray-800 flex justify-center items-center">
+    <section className="main">
       <div className="container-box">
         <h2 className="title">TODO LIST</h2>
         <TodoForm
@@ -34,7 +34,7 @@ function Todo() {
           deleteTodo={deleteTodo}
         />
       </div>
-    </div>
+    </section>
   );
 }
 
