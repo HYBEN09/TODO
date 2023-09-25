@@ -10,11 +10,10 @@ import { TodoProvider } from './context/TodoContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
 const storage = new LocalStorage();
-const httpClient = new HttpClientImpl(
-  'https://www.pre-onboarding-selection-task.shop/',
-  storage
-);
+const httpClient = new HttpClientImpl(baseUrl, storage);
 const authService = new AuthServiceImpl(httpClient, storage);
 const todoService = new LocalTodoService(httpClient);
 
