@@ -1,6 +1,13 @@
 import Button from '../UI/Button';
 
 export function TodoForm({ newTodo, handleAddTodo, handleChange }) {
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleAddTodo();
+    }
+  };
+
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <div className="mb-4 flex items-center gap-5">
@@ -8,6 +15,7 @@ export function TodoForm({ newTodo, handleAddTodo, handleChange }) {
           type="text"
           value={newTodo}
           onChange={handleChange}
+          onKeyPress={handleKeyPress}
           className="w-full p-2 border rounded-lg focus:ring focus:ring-indigo-200 dark:focus:ring-yellow-400 dark:text-black"
           placeholder="Add a new todo"
         />

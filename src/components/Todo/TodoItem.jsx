@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '../UI/Button';
 
 export function TodoItem({ id, todo, updateTodo, deleteTodo }) {
+  const [isChecked, setIsChecked] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(todo);
 
@@ -19,6 +20,10 @@ export function TodoItem({ id, todo, updateTodo, deleteTodo }) {
     setEditedContent(todo);
   };
 
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <li className="mb-2">
       {isEditing ? (
@@ -27,7 +32,7 @@ export function TodoItem({ id, todo, updateTodo, deleteTodo }) {
             type="text"
             value={editedContent}
             onChange={(e) => setEditedContent(e.target.value)}
-            className="w-full p-2 border rounded-lg focus:ring focus:ring-indigo-200 dark:focus:ring-yellow-400"
+            className="w-full p-2 border rounded focus:ring focus:ring-indigo-200 dark:focus:ring-yellow-400  dark:text-black"
           />
           <Button
             type="button"
@@ -46,9 +51,22 @@ export function TodoItem({ id, todo, updateTodo, deleteTodo }) {
         </div>
       ) : (
         <div className="flex items-center gap-2">
-          <label className="w-[310px] py-2">
-            <input type="checkbox" className="form-checkbox" />
-            <span className="text-gray-800 dark:text-gray-200">{todo}</span>
+          <label className="w-[310px] py-2 flex items-center gap-5">
+            <input
+              type="checkbox"
+              className={`form-checkbox h-5 w-5 text-sky-500  border-gray-300 focus:ring focus:ring-sky-200 dark:focus:ring-yellow-400 ${
+                isChecked ? 'line-through' : ''
+              }`}
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+            />
+            <p
+              className={`text-gray-800 dark:text-gray-200 ${
+                isChecked ? 'line-through' : ''
+              }`}
+            >
+              {todo}
+            </p>
           </label>
           <Button
             type="button"
