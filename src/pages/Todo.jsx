@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { useTodo } from '../context/TodoContext';
 import { TodoForm } from '../components/Todo/TodoForm';
 import { TodoList } from '../components/Todo/TodoList';
+import { useDocumentTitle } from '../hooks';
 
 function Todo() {
+  useDocumentTitle('TODO | 투두리스트');
+
   const [newTodo, setNewTodo] = useState('');
   const { todos, createTodo, updateTodo, deleteTodo } = useTodo();
 

@@ -1,6 +1,9 @@
 import { SignupForm } from '@/components/Auth/SignupForm';
+import { useDocumentTitle } from '../hooks';
 
 function Signup() {
+  useDocumentTitle('TODO | 회원가입');
+
   return (
     <section className="main">
       <div className="container-box">
