@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
-import { useValidation } from '@/hooks/index';
 import { useAuth } from '@/context/AuthContext';
+import { useValidation, useNavigation } from '@/hooks/index';
 
 export function SignupForm() {
   const [userInputs, setUserInputs] = useState({
@@ -10,8 +10,10 @@ export function SignupForm() {
     password: '',
   });
 
-  const { signup } = useAuth();
   const { email, password } = userInputs;
+
+  const { signup } = useAuth();
+  const { navigateSignin } = useNavigation();
   const { emailValid, passwordValid, validateEmail, validatePassword } =
     useValidation();
 
@@ -35,6 +37,7 @@ export function SignupForm() {
       signup(email, password)
         .then(() => {
           alert('회원가입이 완료되었습니다.');
+          navigateSignin();
           console.log(userInputs);
         })
         .catch((error) => {
