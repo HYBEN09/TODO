@@ -7,14 +7,24 @@ export const useTodo = () => useContext(TodoContext);
 export function TodoProvider({ children, todoService }) {
   const [todos, setTodos] = useState([]);
 
+  // 앱 초기화 시, 로컬 스토리지에서 투두 데이터 가져오기
   useEffect(() => {
-    todoService.get().then((todos) => setTodos(todos));
-  }, [todoService, setTodos]);
+    const todoData = localStorage.getItem('todos');
+    if (todoData) {
+      setTodos(JSON.parse(todoData));
+    } else {
+      setTodos([]);
+    }
+  }, []);
 
   const createTodo = (todo) => {
-    todoService
-      .create(todo)
-      .then((newTodo) => setTodos((prev) => [...prev, newTodo]));
+    todoService.create(todo).then((newTodo) => {
+      setTodos((prev) => {
+        const updatedTodos = [...prev, newTodo];
+        localStorage.setItem('todos', JSON.stringify(updatedTodos));
+        return updatedTodos;
+      });
+    });
   };
 
   const updateTodo = (id, updatedTodo) => {
@@ -29,7 +39,11 @@ export function TodoProvider({ children, todoService }) {
 
   const deleteTodo = (id) => {
     todoService.delete(id).then(() => {
-      setTodos((prev) => prev.filter((todo) => todo.id !== id));
+      setTodos((prev) => {
+        const updatedTodos = prev.filter((todo) => todo.id !== id);
+        localStorage.setItem('todos', JSON.stringify(updatedTodos));
+        return updatedTodos;
+      });
     });
   };
 

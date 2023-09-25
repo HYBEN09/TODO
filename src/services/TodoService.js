@@ -11,9 +11,10 @@
 // }
 
 export class LocalTodoService {
-  constructor() {
+  constructor(storage) {
     this.id = 0;
     this.todos = [];
+    this.storage = storage;
   }
 
   async get() {

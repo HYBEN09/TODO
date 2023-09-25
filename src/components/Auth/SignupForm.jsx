@@ -10,9 +10,8 @@ export function SignupForm() {
     password: '',
   });
 
-  const { email, password } = userInputs;
   const { signup } = useAuth();
-
+  const { email, password } = userInputs;
   const { emailValid, passwordValid, validateEmail, validatePassword } =
     useValidation();
 
@@ -33,23 +32,26 @@ export function SignupForm() {
 
   const signupWithForm = () => {
     if (emailValid && passwordValid) {
-      signup(email, password);
+      signup(email, password)
+        .then(() => {
+          alert('회원가입이 완료되었습니다.');
+          console.log(userInputs);
+        })
+        .catch((error) => {
+          alert(`회원가입 실패: ${error.message}`);
+        });
+
       setUserInputs({
-        email: '',
-        password: '',
+        email: ' ',
+        password: ' ',
       });
     } else {
       alert('이메일과 비밀번호를 올바르게 입력하세요.');
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(userInputs);
-  };
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <Input
         id="email"
         name="email"

@@ -2,7 +2,7 @@ export class LocalStorage {
   #key;
 
   constructor() {
-    this.#key = "ACCESS_TOKEN";
+    this.#key = 'ACCESS_TOKEN';
   }
 
   save(token) {
