@@ -1,4 +1,4 @@
-export class LocalStorage {
+export class TokenStorage {
   #key;
 
   constructor() {

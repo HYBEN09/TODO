@@ -11,7 +11,7 @@ export function TodoItem({ id, todo, updateTodo, deleteTodo }) {
   };
 
   const handleSaveEdit = () => {
-    updateTodo(id, editedContent);
+    updateTodo(id, { todo: editedContent });
     setIsEditing(false);
   };
 

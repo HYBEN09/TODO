@@ -1,20 +1,8 @@
-//* TodoService Interface
-// get():Promise<Todo[]>
-// create(todo:string):Promise<Todo>
-
-//* Todo
-// {
-//   "id": number,
-//   "todo": string,
-//   "isCompleted": boolean,
-//   "userId": number
-// }
-
 export class LocalTodoService {
-  constructor(storage) {
+  constructor(todoStorage) {
     this.id = 0;
-    this.todos = [];
-    this.storage = storage;
+    this.todos = todoStorage.get() || [];
+    this.todoStorage = todoStorage;
   }
 
   async get() {
@@ -26,42 +14,23 @@ export class LocalTodoService {
     const newTodos = [...this.todos, newTodo];
 
     this.todos = newTodos;
+    this.todoStorage.save(this.todos);
 
     return newTodo;
   }
 
   async update(id, updatedTodo) {
-    this.todos = this.todos.map((todo) =>
-      todo.id === id ? { ...todo, todo: updatedTodo } : todo
+    let todos = this.todos.map((todo) =>
+      todo.id === id ? { ...todo, ...updatedTodo } : todo
     );
+
+    this.todoStorage.save(todos);
+    this.todos = todos;
   }
 
   async delete(id) {
-    this.todos = this.todos.filter((todo) => todo.id !== id);
-  }
-}
-
-export class TodoServiceImpl {
-  #httpClient;
-
-  constructor(httpClient) {
-    this.#httpClient = httpClient;
-  }
-
-  async get() {
-    const response = await this.#httpClient.fetch('todos');
-
-    return response.json();
-  }
-
-  async create(todo) {
-    const response = await this.#httpClient.fetch('todos', {
-      method: 'POST',
-      body: JSON.stringify({
-        todo,
-      }),
-    });
-
-    return response.json();
+    let todos = this.todos.filter((todo) => todo.id !== id);
+    this.todoStorage.save(todos);
+    this.todos = todos;
   }
 }

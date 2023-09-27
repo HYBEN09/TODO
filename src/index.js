@@ -2,20 +2,23 @@ import './index.css';
 import App from './App';
 import ReactDOM from 'react-dom/client';
 import { AuthProvider } from './context/AuthContext';
-import { LocalStorage } from './storage/LocalStorage';
+import { TokenStorage } from './storage/TokenStorage';
 import { HttpClientImpl } from './httpClient/httpClient';
 import { AuthServiceImpl } from './services/AuthService';
 import { LocalTodoService } from './services/TodoService';
 import { TodoProvider } from './context/TodoContext';
+import { TodoStorage } from './storage/TodoStorage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
-const storage = new LocalStorage();
-const httpClient = new HttpClientImpl(baseUrl, storage);
-const authService = new AuthServiceImpl(httpClient, storage);
-const todoService = new LocalTodoService(httpClient);
+const tokenStorage = new TokenStorage();
+const todoStorage = new TodoStorage();
+
+const httpClient = new HttpClientImpl(baseUrl, tokenStorage);
+const authService = new AuthServiceImpl(httpClient, tokenStorage);
+const todoService = new LocalTodoService(todoStorage);
 
 root.render(
   <>

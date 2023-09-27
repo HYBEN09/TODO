@@ -8,21 +8,14 @@ export function TodoProvider({ children, todoService }) {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    const todoData = localStorage.getItem('todos');
-    if (todoData) {
-      setTodos(JSON.parse(todoData));
-    } else {
-      setTodos([]);
-    }
-  }, []);
+    todoService.get().then((todos) => {
+      setTodos(todos || []);
+    });
+  }, [todoService]);
 
   const createTodo = (todo) => {
     todoService.create(todo).then((newTodo) => {
-      setTodos((prev) => {
-        const updatedTodos = [...prev, newTodo];
-        localStorage.setItem('todos', JSON.stringify(updatedTodos));
-        return updatedTodos;
-      });
+      setTodos((prev) => [...prev, newTodo]);
     });
   };
 
@@ -30,7 +23,7 @@ export function TodoProvider({ children, todoService }) {
     todoService.update(id, updatedTodo).then(() => {
       setTodos((prev) =>
         prev.map((todo) =>
-          todo.id === id ? { ...todo, todo: updatedTodo } : todo
+          todo.id === id ? { ...todo, ...updatedTodo } : todo
         )
       );
     });
@@ -38,11 +31,7 @@ export function TodoProvider({ children, todoService }) {
 
   const deleteTodo = (id) => {
     todoService.delete(id).then(() => {
-      setTodos((prev) => {
-        const updatedTodos = prev.filter((todo) => todo.id !== id);
-        localStorage.setItem('todos', JSON.stringify(updatedTodos));
-        return updatedTodos;
-      });
+      setTodos((prev) => prev.filter((todo) => todo.id !== id));
     });
   };
 
