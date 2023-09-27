@@ -2,13 +2,17 @@
 
 ## [원티드 프리온보딩 프론트엔드 인턴쉽 사전과제](https://github.com/walking-sunset/selection-task) 리팩토링
 
+> ID:wanted1234@gmail.com  | PASSWORD: wanted1234
+
 ### 1. 과제 소개
 
 - 목표 : 사전에 만들었던 '투두리스트' 리펙토링
 - 작업 기간 : 2023.09.21 ~2023.09.25
+- 과제 수행하면서 기록한 블로그 : http://127.0.0.1:4000/categories/todolist/
 
 ### 2. 배포
 - 배포 링크 `vercel` : https://todo-hyben09.vercel.app/
+  
 
 ### 3. 기술 스택
 `Vite` `React` `HTML5` `Tailwind CSS` `Javascript` `React Router` 
@@ -39,18 +43,17 @@
 | <img width="600" alt="image" src="https://github.com/HYBEN09/TODO/assets/104710243/196f96e2-a14a-4c1d-83ad-183c151a0b86">|
 
 
-|          로그인              |
-|-----------------------------------------------------|
-|<img width="700" alt="image" src="https://github.com/HYBEN09/TODO/assets/104710243/d87e0a51-2e4f-4915-9dea-c104998831e2"> |
+|          로그인              |                 로그아웃                           |
+|-----------------------------------------------------|--------|
+|<img width="500" alt="image" src="https://github.com/HYBEN09/TODO/assets/104710243/d87e0a51-2e4f-4915-9dea-c104998831e2"> | <img width="400" alt="image" src="https://github.com/HYBEN09/TODO/assets/104710243/3d1766df-d72b-41d3-b1f6-9ce73172b4cf">|
 
 |         투두리스트              |
 |-----------------------------------------------------|
 |<img width="600" alt="image" src="https://github.com/HYBEN09/TODO/assets/104710243/2fe75b61-2867-4068-9f33-7ae6ebaef836"> |
 
-|         다크모드            |
-|-----------------------------------------------------|
-|<img width="600" alt="image" src="https://github.com/HYBEN09/TODO/assets/104710243/5187c41f-6b23-4065-854b-0b87f92ec915"> |
-
+|         다크모드            | 404 페이지|
+|-----------------------------------------------------|--------------------------|
+|<img width="500" alt="image" src="https://github.com/HYBEN09/TODO/assets/104710243/5187c41f-6b23-4065-854b-0b87f92ec915"> | <img width="500" alt="image" src="https://github.com/HYBEN09/TODO/assets/104710243/2697b3dd-13d7-4c99-b48c-9116034b9f01">|
 
 
 
@@ -112,6 +115,7 @@
 │   │   ├── AuthService.js
 │   │   └── TodoService.js
 │   └── storage
-│       └── LocalStorage.js
+│       ├── TodoStorage.js
+│       └── TokenStorage.js
 └── tailwind.config.js
 ```
