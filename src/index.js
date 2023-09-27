@@ -11,7 +11,7 @@ import { TodoStorage } from './storage/TodoStorage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
+const baseUrl = ' https://www.pre-onboarding-selection-task.shop/';
 
 const tokenStorage = new TokenStorage();
 const todoStorage = new TodoStorage();
