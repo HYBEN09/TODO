@@ -8,7 +8,7 @@
 
 - 목표 : 사전에 만들었던 '투두리스트' 리펙토링
 - 작업 기간 : 2023.09.21 ~2023.09.25
-- 과제 수행하면서 기록한 블로그 : http://127.0.0.1:4000/categories/todolist/
+- 과제 수행하면서 기록한 블로그 : https://hyben09.github.io/categories/todolist/
 
 ### 2. 배포
 - 배포 링크 `vercel` : https://todo-hyben09.vercel.app/
