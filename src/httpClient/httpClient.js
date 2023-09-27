@@ -14,8 +14,8 @@ export class HttpClientImpl {
     const response = await window.fetch(this.#baseURL + endPoint, {
       ...options,
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + this.#storage.get(),
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + this.#storage.get(),
         ...options.headers,
       },
     });
@@ -23,7 +23,13 @@ export class HttpClientImpl {
     if (response.ok) {
       return response;
     } else {
-      const errorResponse = await response.json();
+      let errorResponse;
+      try {
+        errorResponse = await response.json();
+      } catch (e) {
+        errorResponse = await response.text();
+      }
+
       throw new Error(
         `⛔️ HTTP Error ${response.status}: ${errorResponse.message}`
       );
