@@ -11,8 +11,8 @@ export class AuthServiceImpl {
   }
 
   async signin(email, password) {
-    const response = await this.httpClient.fetch("auth/signin", {
-      method: "POST",
+    const response = await this.httpClient.fetch('auth/signin', {
+      method: 'POST',
       body: JSON.stringify({
         email,
         password,
@@ -25,8 +25,8 @@ export class AuthServiceImpl {
   }
 
   async signup(email, password) {
-    this.httpClient.fetch("auth/signup", {
-      method: "POST",
+    this.httpClient.fetch('auth/signup', {
+      method: 'POST',
       body: JSON.stringify({
         email,
         password,

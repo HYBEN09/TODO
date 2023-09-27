@@ -1,19 +1,26 @@
 import { useDarkMode, useNavigation } from '@/hooks/index';
 import Button from './Button';
+import { useAuth } from '../../context/AuthContext';
 
 function Header() {
   const { toggleDarkMode, isDarkModeOn } = useDarkMode();
   const { navigateHome, navigateSignin, navigateSignup, navigateTodo } =
     useNavigation();
+  const { logout } = useAuth();
+
+  const token = localStorage.getItem('ACCESS_TOKEN');
 
   const handleTodoClick = () => {
-    const token = localStorage.getItem('ACCESS_TOKEN');
-
     if (token) {
       navigateTodo();
     } else {
       navigateSignin();
     }
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigateSignin();
   };
 
   return (
@@ -27,12 +34,28 @@ function Header() {
           <p className="font-bold pl-4 pt-1 text-2xl">TODO LIST</p>
         </button>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          <Button type="button" onClick={navigateSignin} className="bg-sky-100">
-            로그인
-          </Button>
-          <Button type="button" onClick={navigateSignup} className="bg-sky-100">
-            회원가입
-          </Button>
+          {token ? (
+            <Button type="button" onClick={handleLogout} className="bg-sky-100">
+              로그아웃
+            </Button>
+          ) : (
+            <>
+              <Button
+                type="button"
+                onClick={navigateSignin}
+                className="bg-sky-100"
+              >
+                로그인
+              </Button>
+              <Button
+                type="button"
+                onClick={navigateSignup}
+                className="bg-sky-100"
+              >
+                회원가입
+              </Button>
+            </>
+          )}
           <Button
             type="button"
             onClick={handleTodoClick}
@@ -40,7 +63,6 @@ function Header() {
           >
             TODO
           </Button>
-
           <Button
             type="button"
             onClick={toggleDarkMode}

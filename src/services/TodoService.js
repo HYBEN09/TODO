@@ -30,6 +30,7 @@ export class LocalTodoService {
 
   async delete(id) {
     let todos = this.todos.filter((todo) => todo.id !== id);
+
     this.todoStorage.save(todos);
     this.todos = todos;
   }
