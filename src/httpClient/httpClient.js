@@ -1,6 +1,6 @@
 //* httpClient interface
 //* fetch (endPoints, options):Promise<Response>
-
+export const API_URL = 'https://www.pre-onboarding-selection-task.store/';
 export class HttpClientImpl {
   #baseURL;
   #storage;
